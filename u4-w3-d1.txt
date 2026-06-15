@@ -24,3 +24,17 @@ JOIN fornitori on numero_fornitore = id_fornitore
 FROM fatture 
 WHERE iva = 20
 GROUP BY EXTRACT(YEAR FROM data_fattura)
+
+8. SELECT EXTRACT(YEAR FROM data_fattura), COUNT(*), SUM(importo)
+FROM fatture
+GROUP BY EXTRACT(YEAR FROM data_fattura)
+
+10. SELECT clienti.regione_residenza, SUM(fatture.importo) AS totale_importi
+FROM fatture
+JOIN clienti ON fatture.id_cliente = numero_cliente
+GROUP BY clienti.regione_residenza
+
+11. SELECT COUNT(DISTINCT numero_cliente) 
+FROM clienti
+JOIN fatture ON clienti.numero_cliente = fatture.id_cliente
+WHERE clienti.anno_di_nascita = 1980 AND fatture.importo > 50
